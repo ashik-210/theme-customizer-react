@@ -1,16 +1,61 @@
-# React + Vite
+# Theme Customizer (React + useReducer)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React app for practicing global state management with the `useReducer` hook. Users can toggle between light/dark themes, adjust font size, and switch accent colors — all controlled through a single reducer and reflected live across the UI.
 
-Currently, two official plugins are available:
+**Live demo:** https://theme-customizer-react.vercel.app/
+**Repository:** https://github.com/ashik-210/theme-customizer-react
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- 🌗 Light/Dark theme toggle
+- 🔠 Increase/decrease font size dynamically
+- 🎨 Accent color switcher (blue, green, purple)
+- ♻️ Reset to default state
+- 📱 Fully responsive layout (mobile, tablet, desktop)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React (Hooks — `useReducer`)
+- Tailwind CSS
+- Vite
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## How It Works
+
+All theme-related state (`theme`, `fontSize`, `accent`) is managed in a single reducer in `App.jsx`. UI components (`Card`, `ThemeCustomizer`) receive `state` and `dispatch` as props and never manage their own local state — every change flows through defined action types:
+
+- `TOGGLE_THEME`
+- `INCREASE_FONT`
+- `DECREASE_FONT`
+- `SET_ACCENT`
+- `RESET`
+
+## Getting Started
+
+```bash
+# Clone the repo
+git clone https://github.com/ashik-210/theme-customizer-react.git
+cd theme-customizer-react
+
+# Install dependencies
+npm install
+
+# Run locally
+npm run dev
+```
+
+## Project Structure
+
+```
+src/
+├── App.jsx                  # Root component, reducer, and global state
+├── ThemeCustomizer.jsx      # Controls panel (theme, font size, accent)
+└── components/
+    └── Card.jsx              # Sample content card reflecting accent color
+```
+
+## What This Project Demonstrates
+
+- Centralized state management with `useReducer` instead of multiple `useState` calls
+- Passing `dispatch` down to child components for controlled state updates
+- Applying dynamic Tailwind classes safely (avoiding purge issues with static class maps)
+- Responsive design with Tailwind's breakpoint utilities
